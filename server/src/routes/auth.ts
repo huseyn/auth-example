@@ -1,4 +1,3 @@
-// server/src/routes/auth.ts
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import { users } from "../data/users";
@@ -20,9 +19,10 @@ const router = Router();
 function setRefreshCookie(res: any, token: string) {
   res.cookie("refreshToken", token, {
     httpOnly: true,
-    secure: false,        // dev mühitdə mütləq false
-    sameSite: "lax",      // strict çox vaxt reject edir
-    path: "/",            // hər route-da getsin
+    secure: ENV.COOKIE_SECURE, 
+    sameSite: "lax",          
+    path: "/",                 
+    maxAge: 7 * 24 * 60 * 60 * 1000, 
   });
 }
 

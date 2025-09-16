@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../api";
+import { useAuth } from "../authContext";
 
 export default function AdminPanel() {
+  const { logout } = useAuth();
   const [metrics, setMetrics] = useState(null);
 
   useEffect(() => {
@@ -17,7 +20,16 @@ export default function AdminPanel() {
 
   return (
     <div style={{ padding: 24 }}>
+      <nav style={{ marginBottom: 20, paddingBottom: 10, borderBottom: "1px solid #ccc" }}>
+        <Link to="/dashboard" style={{ marginRight: 15 }}>Dashboard</Link>
+        <Link to="/admin" style={{ marginRight: 15 }}>Admin Panel</Link>
+        <button onClick={logout} style={{ marginLeft: "auto", float: "right" }}>
+          Logout
+        </button>
+      </nav>
+
       <h2>Admin Panel</h2>
+      <h3>Admin Metrics:</h3>
       <pre>{JSON.stringify(metrics, null, 2)}</pre>
     </div>
   );

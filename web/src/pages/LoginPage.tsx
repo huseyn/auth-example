@@ -6,9 +6,7 @@ export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  console.log("login page");
-
-  const [email, setEmail] = useState("user@example.com"); // test üçün hazır dəyər
+  const [email, setEmail] = useState("user@example.com");
   const [password, setPassword] = useState("Password123!");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -20,7 +18,7 @@ export default function LoginPage() {
 
     try {
       await login(email, password);
-      navigate("/dashboard", { replace: true });
+      navigate("/dashboard", { replace: true }); // Navigate directly to dashboard
     } catch {
       setError("Email və ya şifrə yanlışdır");
     } finally {
